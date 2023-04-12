@@ -10,8 +10,8 @@ while True:
     print("Conectado com: ", cliente)
     while True:
         msg_recebida = str(con.recv(1024))
-        print("Recebemos: ", msg_recebida)
-        msg_enviada = b'Olah cliente'
+        print("Recebemos: ", str(msg_recebida)[2:-1])
+        msg_enviada = bytes(input("Sua resposta: "), 'utf-8')
         con.send(msg_enviada)
         break
     con.close()
@@ -50,4 +50,14 @@ a mensagem começa com “b” e, em seguida, a string que se deseja), enviamos 
 
 Todos os dados transmitidos via socket devem estar no formato byte. O socket não envia nem recebe da‐
 dos strings, por exemplo.
+
+*para melhorar a interatividade algumas linhas de codigo foram atualizada com observações: Em relação ao novo 
+código do servidor apresentado, 
+alteramos somente o conteúdo do segundo while, no qual
+estamos convertendo a mensagem que recebemos para string (str(msg_recebida) e, em seguida, fazendo um
+slice ([2:-1]) dela, em que pegamos do segundo caractere até o último caractere da string, com isso, quando re‐
+cebermos, por exemplo: b’olah servidor’, será exibido apenas: olah servidor. Alteramos também a linha refe‐
+rente ao conteúdo da variável msg_enviada, que antes era uma mensagem única e agora é definida por meio do
+input(), no qual o usuário irá digitar o que desejar.
+
     """

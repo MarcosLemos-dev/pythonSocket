@@ -3,14 +3,14 @@ from socket import *
 servidor="127.0.0.1"
 porta=43210
 
-msg = bytes(input("Digite algo: "), 'utf-8')
-obj_socket=socket(AF_INET, SOCK_STREAM)
-obj_socket.connect((servidor,porta))
-obj_socket.send(msg)
-resposta=obj_socket.recv(1024)
-print("Recebemos: ", resposta)
+while True:
+    obj_socket = socket(AF_INET, SOCK_STREAM)
+    obj_socket.connect((servidor, porta))
+    msg = bytes(input("Sua mensagem: "), 'utf-8')
+    obj_socket.send(msg)
+    resposta=obj_socket.recv(1024)
+    print("Resposta do Servidor: ", str(resposta)[2:-1])
 obj_socket.close()
-
 """
 Detalhando as linhas do código apresentado:
 
@@ -26,5 +26,11 @@ conexão com o servidor, por meio da função “connect()”, e, finalmente, en
 servidor, utilizando o método “send()”.
 4. A variável resposta recebe o dado enviado pelo servidor, limitando o tamanho para 1024 bytes.
 5. E finalizamos o código, exibindo a resposta e fechando conexão.
+
+*atualizando a interatividade do codigo
+Do lado do cliente, foi incluído o laço while, para que o cliente possa mandar mais que uma mensagem ao servi‐
+dor, deixamos de fora do while somente a definição do servidor (ip e porta) e o encerramento da conexão. A res‐
+posta do servidor também foi convertida para string e foi realizado o slice da string para considerar somente a
+mensagem válida.
 
 """
