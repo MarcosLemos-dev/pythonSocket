@@ -10,6 +10,8 @@ while True:
     obj_socket.send(msg)
     resposta=obj_socket.recv(1024)
     print("Resposta do Servidor: ", str(resposta)[2:-1])
+    if str(msg)[2:-1].upper()=="FIM":
+        break
 obj_socket.close()
 """
 Detalhando as linhas do código apresentado:
